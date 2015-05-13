@@ -26,6 +26,7 @@ public class TrataConexaoServidorLog implements Runnable{
     private String opcao = "";
 
     
+    //Classe simples, apenas recebe as mensagens dos outros servidores e imprime a mensagem na tela.
     public TrataConexaoServidorLog(Socket conn) throws IOException{
         this.connection = conn;
         dos = new DataOutputStream(connection.getOutputStream());

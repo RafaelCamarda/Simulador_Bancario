@@ -18,6 +18,8 @@ import java.util.logging.Logger;
  *
  * @author rafael
  */
+
+//Classe estática para ler e gravar arquivos
 public class InternalStorage {
      public static void writeObject(String name, Object object) {
          try {

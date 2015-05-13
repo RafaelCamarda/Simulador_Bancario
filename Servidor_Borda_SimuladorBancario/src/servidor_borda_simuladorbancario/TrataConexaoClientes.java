@@ -9,6 +9,8 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -26,6 +28,7 @@ class TrataConexaoClientes implements Runnable {
     private char sucesso = 'w';
     private char fracasso = 'q';
     private String opcao = "";
+    private ArrayList<Integer> qtd_clientes = new ArrayList<Integer>();
 
     public TrataConexaoClientes(Socket conn) throws IOException {
         this.connection = conn;
@@ -42,55 +45,66 @@ class TrataConexaoClientes implements Runnable {
                 System.out.flush();
                 char op = dis.readChar();
 
+                //Verifica qual servidor está menos sobrecarregado e envia para cliente.
+                //Só leva em consideração ips válidos.
                 if (op == 'i') {
                     if (GUI_BORDA.getLbIP1().getText().equals("0.0.0.0") != true) {
-                        System.out.println("Entrei no 1");
-                        System.out.println(GUI_BORDA.getLbIP1().getText());
-                        String ipserv = GUI_BORDA.getLbIP1().getText();
-                        int qtd = Integer.parseInt(GUI_BORDA.getLbQTD1().getText());
-                        qtd++;
-                        dos.writeBoolean(true);
-                        dos.writeUTF(ipserv);
-                        GUI_BORDA.getLbQTD1().setText(Integer.toString(qtd));
-                        break;
+                        qtd_clientes.add(Integer.parseInt(GUI_BORDA.getLbQTD1().getText()));
+
                     } else if (GUI_BORDA.getLbIP2().getText().equals("0.0.0.0") != true) {
-                        String ipserv = GUI_BORDA.getLbIP2().getText();
-                        int qtd = Integer.parseInt(GUI_BORDA.getLbQTD2().getText());
-                        qtd++;
-                        dos.writeBoolean(true);
-                        dos.writeUTF(ipserv);
-                        GUI_BORDA.getLbQTD1().setText(Integer.toString(qtd));
-                        break;
-                    } else if (GUI_BORDA.getLbIP2().getText().equals("0.0.0.0") == true) {
-                        String ipserv = GUI_BORDA.getLbIP3().getText();
-                        int qtd = Integer.parseInt(GUI_BORDA.getLbQTD3().getText());
-                        qtd++;
-                        dos.writeBoolean(true);
-                        dos.writeUTF(ipserv);
-                        GUI_BORDA.getLbQTD1().setText(Integer.toString(qtd));
-                        break;
-                    } else if (GUI_BORDA.getLbIP2().getText().equals("0.0.0.0") == true) {
-                        String ipserv = GUI_BORDA.getLbIP4().getText();
-                        int qtd = Integer.parseInt(GUI_BORDA.getLbQTD4().getText());
-                        qtd++;
-                        dos.writeBoolean(true);
-                        dos.writeUTF(ipserv);
-                        GUI_BORDA.getLbQTD1().setText(Integer.toString(qtd));
-                        break;
+                        qtd_clientes.add(Integer.parseInt(GUI_BORDA.getLbQTD2().getText()));
+
+
+                    } else if (GUI_BORDA.getLbIP3().getText().equals("0.0.0.0") != true) {
+                        qtd_clientes.add(Integer.parseInt(GUI_BORDA.getLbQTD3().getText()));
+
+                    } else if (GUI_BORDA.getLbIP4().getText().equals("0.0.0.0") != true) {
+                        qtd_clientes.add(Integer.parseInt(GUI_BORDA.getLbQTD4().getText()));
+
                     } else {
-                        System.out.println("Enviei falso");
                         dos.writeBoolean(false);
+                        break;
+                    }
+
+                    int minIndex = qtd_clientes.indexOf(Collections.min(qtd_clientes));
+
+                    if (minIndex == 0) {
+                       
+                        String ipserv = GUI_BORDA.getLbIP1().getText();
+                        dos.writeBoolean(true);
+                        dos.writeUTF(ipserv);
+                        break;
+
+                    } else if (minIndex == 1) {
+                        String ipserv = GUI_BORDA.getLbIP2().getText();
+                        dos.writeBoolean(true);
+                        dos.writeUTF(ipserv);
+                        break;
+
+                    } else if (minIndex == 2) {
+
+                        String ipserv = GUI_BORDA.getLbIP3().getText();
+                        dos.writeBoolean(true);
+                        dos.writeUTF(ipserv);
+                        break;
+
+                    } else if (minIndex == 3) {
+                        String ipserv = GUI_BORDA.getLbIP4().getText();
+                        dos.writeBoolean(true);
+                        dos.writeUTF(ipserv);
+                        break;
+
                     }
 
                 } else if (op == 'c') {
-                    
+
                 }
             }
 
         } catch (IOException ex) {
             //Logger.getLogger(TrataConexaoServidorArquivo.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
 
 }

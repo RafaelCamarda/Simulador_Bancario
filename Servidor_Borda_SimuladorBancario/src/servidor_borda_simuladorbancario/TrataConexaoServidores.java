@@ -37,7 +37,8 @@ public class TrataConexaoServidores implements Runnable {
             while (true) {
                 System.out.flush();
                 char op = dis.readChar();
-
+                
+                //Detecta que um servidor se conectou
                 if (op == 'o') {
                     System.out.println("entrei aqui no borda");
                     if (dis.readUTF().equals("online") == true) {
@@ -58,8 +59,28 @@ public class TrataConexaoServidores implements Runnable {
                             GUI_BORDA.getLbQTD2().setText("0");
                         }
                     }
-
+                
+                //Detecta em qual servidor cliente se conectou, e incrementa o valor.
                 } else if (op == 'c') {
+                    String ip = dis.readUTF();
+                    System.out.println("Entrei pra aumentar cliente");
+                    if (GUI_BORDA.getLbIP1().getText().equals(ip) == true) {
+                        int qtd = Integer.parseInt(GUI_BORDA.getLbQTD1().getText());
+                        qtd++;
+                        GUI_BORDA.getLbQTD1().setText(Integer.toString(qtd));
+                    } else if (GUI_BORDA.getLbIP2().getText().equals(ip) == true) {
+                        int qtd = Integer.parseInt(GUI_BORDA.getLbQTD2().getText());
+                        qtd++;
+                        GUI_BORDA.getLbQTD2().setText(Integer.toString(qtd));
+                    } else if (GUI_BORDA.getLbIP3().getText().equals(ip) == true) {
+                        int qtd = Integer.parseInt(GUI_BORDA.getLbQTD3().getText());
+                        qtd++;
+                        GUI_BORDA.getLbQTD3().setText(Integer.toString(qtd));
+                    } else if (GUI_BORDA.getLbIP4().getText().equals(ip) == true) {
+                        int qtd = Integer.parseInt(GUI_BORDA.getLbQTD4().getText());
+                        qtd++;
+                        GUI_BORDA.getLbQTD4().setText(Integer.toString(qtd));
+                    }
 
                 }
             }

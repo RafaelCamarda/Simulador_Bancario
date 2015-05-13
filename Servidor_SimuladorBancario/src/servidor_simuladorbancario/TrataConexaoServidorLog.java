@@ -37,7 +37,7 @@ public class TrataConexaoServidorLog implements Runnable {
     @Override
     public void run() {
         try {
-
+            //Simplismente envia uma string para o servidor de log.
             dos.writeUTF(text);
 
             dos.flush();

@@ -40,6 +40,8 @@ public class TrataConexaoServidorBorda implements Runnable {
     @Override
     public void run() {
         try {
+            
+            //Aviso de que o servidor está online
             System.out.println("to no server local borda");
             if (op.equals("o") == true) {
                 System.out.println("Enviarei ao servidor borda");
@@ -49,8 +51,11 @@ public class TrataConexaoServidorBorda implements Runnable {
 
                 dos.writeUTF(ip);
             }
+            
+            //Aviso de que mais um cliente se conectou
             else if(op.equals("c") == true){
-                
+                dos.writeChar('c');
+                dos.writeUTF(ip);
             }
 
             dos.flush();

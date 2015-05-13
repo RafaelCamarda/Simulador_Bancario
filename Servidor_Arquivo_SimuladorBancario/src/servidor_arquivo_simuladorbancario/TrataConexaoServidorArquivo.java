@@ -44,7 +44,8 @@ public class TrataConexaoServidorArquivo implements Runnable {
                 System.out.flush();
                 char op = dis.readChar();
                 boolean achado = false;
-
+                
+                //Recebendo atualização de clientes
                 if (op == 'l') {
                     String nome = dis.readUTF();
                     Double saldo = dis.readDouble();
@@ -78,6 +79,8 @@ public class TrataConexaoServidorArquivo implements Runnable {
                         InternalStorage.writeObject("arqClientes", SharedResources.getInstance().getClientes());
                     }
                     System.out.println("Recebi mano!");
+                
+                //Envio dos clientes para os servidores.
                 } else if (op == 'e') {
                     int qtd = SharedResources.getInstance().getClientes().size();
                     dos.writeInt(qtd);

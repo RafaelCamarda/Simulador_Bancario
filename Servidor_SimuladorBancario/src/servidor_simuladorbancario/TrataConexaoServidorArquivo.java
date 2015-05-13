@@ -42,6 +42,7 @@ public class TrataConexaoServidorArquivo implements Runnable {
     public void run() {
        try {
             
+          //Envia os clientes para o servidor de arquivos
            if(op.equals("enviaCliente") == true){
                dos.writeChar('l');
                System.out.println("Enviei l");
@@ -50,6 +51,8 @@ public class TrataConexaoServidorArquivo implements Runnable {
                dos.writeUTF(c.getSenha());
                System.out.println("TO enviando mano!");
            }
+           
+           //Recebe os clientes quando inicia.
            else if(op.equals("recebeCliente") == true){
                dos.writeChar('e');
                int qtd = dis.readInt();

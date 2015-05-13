@@ -274,6 +274,7 @@ public class GUI_LOG extends javax.swing.JFrame {
     private void btSalvaLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btSalvaLogMouseClicked
         PrintWriter out;
         
+        //Salva o arquivo de texto.
         try {
             out = new PrintWriter(new BufferedWriter(new FileWriter("LOG.txt")));
             out.write(taLog2.getText());

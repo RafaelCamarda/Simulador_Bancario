@@ -25,11 +25,13 @@ class TrataConexao implements Runnable {
     private Socket connectionServ;
     private Socket connectionServArq;
     private Socket connectionServLog;
+    private Socket connectionServBorda;
     private DataInputStream dis = null;
     private DataOutputStream dos = null;
     private char sucesso = 'w';
     private char fracasso = 'q';
     private Thread tServ;
+    private Thread tServBorda;
     private Thread tServArq;
     private Thread tServLog;
     private String resultIp = null;
@@ -74,8 +76,20 @@ class TrataConexao implements Runnable {
                             } catch (IndexOutOfBoundsException ex) {
 
                             }
-                            break;
 
+                            try {
+                                System.out.println("Vou enviar ip: " + resultIp);
+                                connectionServBorda = new Socket(SharedResources.getInstance().getServers().get(0), 9010);
+                                TrataConexaoServidorBorda trataServidorBorda;
+                                trataServidorBorda = new TrataConexaoServidorBorda(connectionServBorda, resultIp, "c");
+                                tServBorda = new Thread(trataServidorBorda);
+                                tServBorda.start();
+                            } catch (IOException ex) {
+                                System.out.println("Falha ao conectar ao servidor: " + SharedResources.getInstance().getServers().get(0));
+                            } catch (IndexOutOfBoundsException ex) {
+
+                            }
+                            break;
                         } else {
                             contador++;
                             if (contador > (SharedResources.getInstance().getClientes().size() - 1)) {

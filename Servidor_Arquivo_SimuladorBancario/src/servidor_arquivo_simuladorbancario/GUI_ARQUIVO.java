@@ -269,13 +269,14 @@ public class GUI_ARQUIVO extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new GUI_ARQUIVO().setVisible(true);
-                Cliente c = new Cliente("nulo", 0.0, "1234");
+                //Cliente c = new Cliente("nulo", 0.0, "1234");
                 //SharedResources.getInstance().getClientes().add(c);
                 //InternalStorage.writeObject("arqClientes", SharedResources.getInstance().getClientes());
                 leArquivo();
             }
 
             private void leArquivo() {
+                //Faz a leitura do arquivo
                  SharedResources.getInstance().setClientes((ArrayList<Cliente>)InternalStorage
                         .readObject("arqClientes"));
             }
