@@ -53,8 +53,8 @@ public class SharedResources {
         clientes = new ArrayList<Cliente>();
         servers = new ArrayList<String>();
         
-        servers.add("192.168.0.200");
-        //servers.add("172.16.103.52");
+        servers.add("192.168.43.10");
+        servers.add("192.168.43.122");
         //servers.add("192.168.0.113");
         //servers.add("192.168.0.114");
     }

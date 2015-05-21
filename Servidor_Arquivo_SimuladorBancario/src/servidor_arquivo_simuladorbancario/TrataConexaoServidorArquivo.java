@@ -61,13 +61,13 @@ public class TrataConexaoServidorArquivo implements Runnable {
                         }
                         
                         try {
-                        connectionServLog = new Socket(SharedResources.getInstance().getServers().get(0), 8090);
+                        connectionServLog = new Socket(SharedResources.getInstance().getServers().get(1), 8090);
                         TrataConexaoServidorLog trataServidoresLog;
                         trataServidoresLog = new TrataConexaoServidorLog(connectionServLog, "Servidor de Arquivo recebeu atualização de clientes\n");
                         tServLog = new Thread(trataServidoresLog);
                         tServLog.start();
                     } catch (IOException ex) {
-                        System.out.println("Falha ao conectar ao servidor: " + SharedResources.getInstance().getServers().get(0));
+                        System.out.println("Falha ao conectar ao servidor: " + SharedResources.getInstance().getServers().get(1));
                     } catch (IndexOutOfBoundsException ex) {
 
                     }
@@ -91,13 +91,13 @@ public class TrataConexaoServidorArquivo implements Runnable {
                     }
 
                     try {
-                        connectionServLog = new Socket(SharedResources.getInstance().getServers().get(0), 8090);
+                        connectionServLog = new Socket(SharedResources.getInstance().getServers().get(1), 8090);
                         TrataConexaoServidorLog trataServidoresLog;
                         trataServidoresLog = new TrataConexaoServidorLog(connectionServLog, "Servidor de Arquivo enviou lista de clientes\n");
                         tServLog = new Thread(trataServidoresLog);
                         tServLog.start();
                     } catch (IOException ex) {
-                        System.out.println("Falha ao conectar ao servidor: " + SharedResources.getInstance().getServers().get(0));
+                        System.out.println("Falha ao conectar ao servidor: " + SharedResources.getInstance().getServers().get(1));
                     } catch (IndexOutOfBoundsException ex) {
 
                     }

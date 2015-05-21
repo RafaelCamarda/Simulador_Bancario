@@ -33,7 +33,7 @@ public class GUI extends javax.swing.JFrame {
     private double valor;
     Random randomGenerator;
 
-    private static final String ipBorda = "192.168.0.200";
+    private static final String ipBorda = "192.168.43.10";
 
     /**
      * Creates new form GUI

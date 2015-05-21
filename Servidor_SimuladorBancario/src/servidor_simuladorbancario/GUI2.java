@@ -301,7 +301,7 @@ public class GUI2 extends javax.swing.JFrame {
         recebeClientes();
 
         try {
-            connectionServLog = new Socket(SharedResources.getInstance().getServers().get(0), 8090);
+            connectionServLog = new Socket(SharedResources.getInstance().getServers().get(1), 8090);
             TrataConexaoServidorLog trataServidoresLog;
             trataServidoresLog = new TrataConexaoServidorLog(connectionServLog, "Servidor " + resultIp + " online!\n");
             tServLog = new Thread(trataServidoresLog);
@@ -358,7 +358,7 @@ public class GUI2 extends javax.swing.JFrame {
         }
 
         try {
-            connectionServLog = new Socket(SharedResources.getInstance().getServers().get(0), 8090);
+            connectionServLog = new Socket(SharedResources.getInstance().getServers().get(1), 8090);
             TrataConexaoServidorLog trataServidoresLog;
             trataServidoresLog = new TrataConexaoServidorLog(connectionServLog, "Cliente cadastrado: " + c.getNome() + "\n");
             tServLog = new Thread(trataServidoresLog);
